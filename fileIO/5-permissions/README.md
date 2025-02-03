@@ -1,6 +1,27 @@
 Instructions
 ===
 
+Demo multi-user permissions in bash
+---
+
+```
+touch file_r.txt
+sudo chown root file_r.txt 
+sudo chmod 640 file_r.txt 
+ls -ltr file_r.txt 
+#-rw-r-----  1 root  staff  0 Feb  3 11:58 file_r.txt
+echo "alice" >> file_r.txt 
+#expected to fail
+cat file_r.txt 
+#expected to succeed 'cause the current user (tristartom) may be in the same group as root.
+sudo su
+#in the prompt
+echo "bob" >> file_r.txt 
+exit
+# exit the prompt
+cat file_r.txt 
+```
+
 Run capability-leaking attack
 ---
 
