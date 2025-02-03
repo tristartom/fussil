@@ -37,10 +37,11 @@ echo yyy >&3
 ```
 
 Toggle the protection on, in the setuid.c
-```
 
-Run seed-setuidlab-task8 attack
+Run seed-setuidlab-task8 attack （deprecated）
 ---
+
+This attack doesn't work on latest Linux/MacOS which is protected.
 
 ```
 make clean
