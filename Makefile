@@ -4,7 +4,7 @@ all: c
 c:
 	git config --global user.email tristartom@gmail.com
 	git add -A
-	git commit -am 'All'
+	git commit -am 'setuid instructions added (with weixiang)'
 
 b:
 	make -C socket all

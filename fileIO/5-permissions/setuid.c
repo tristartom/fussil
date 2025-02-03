@@ -13,7 +13,7 @@ int main(void){
   }
 
   printf("fd is %d\n", fd);
-  close(fd);
+  // protection: close(fd);
   // Permanently disable the privilege by making the
   // effective uid the same as the real uid
   setuid(getuid());                                

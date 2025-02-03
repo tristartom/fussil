@@ -4,6 +4,8 @@ all:
 	ls -ltr a.out
 	sudo chmod 4755 a.out
 	ls -ltr a.out
+	sudo touch /etc/zzz
+	sudo chmod 744 /etc/zzz
 	cat /etc/zzz
 	echo aaa > /etc/zzz
 	./a.out
