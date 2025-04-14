@@ -9,11 +9,8 @@ void inc_file() {
   fclose(f);}
 
 int main() {
-  if (fork() == 0) {
-    for (int i = 0; i < 1000; i++) 
-      inc_file();
-  } else {
-    for (int i = 0; i < 1000; i++) 
-      inc_file();
-  }}
+  fork();
+  inc_file();
+  inc_file();
+}
 
