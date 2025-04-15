@@ -29,19 +29,20 @@ void inc_file() {
 
 int* lock = NULL;
 void safe_inc_file() {
-  if (lock == NULL){
-    lock = (int *)shared_malloc(sizeof(int));
-    *lock = 1;
-  }
   slock_acquire(lock);
   inc_file();
   slock_release(lock);
 }
 
 int main() {
+  lock = (int *)shared_malloc(sizeof(int));
+  *lock = 1;
+
   fork();
+
   safe_inc_file();
   safe_inc_file();
   safe_inc_file();
   safe_inc_file();
 }
+
