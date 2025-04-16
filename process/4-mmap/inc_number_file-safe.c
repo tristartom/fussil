@@ -35,13 +35,9 @@ void safe_inc_file() {
 }
 
 int main() {
-  lock = (int *)shared_malloc(sizeof(int));
-  *lock = 1;
+  lock = (int *)shared_malloc(sizeof(int));*lock = 1;
 
   fork();
-
-  safe_inc_file();
-  safe_inc_file();
   safe_inc_file();
   safe_inc_file();
 }
