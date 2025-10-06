@@ -22,10 +22,10 @@ int* comp2(int st, int ta){
 ```
 
 **Exercise 1:**
-Define `int` to be 2-bit long in SPIN. Implement a checker to verify the target property (`(*comp(st, ta)) > st`) and model `comp` in SPIN.
+Define symbolic variable `int2` to be 2-bit long in SPIN. Implement a checker to verify the target property (`(*comp(st, ta)) > st`) and model `comp` in SPIN.
 
 **Exercise 2:**
-Analyze your SPIN checker in Exercises 1 and 2. Describe how many states it explored.
+Analyze your SPIN checker in Exercises 1, and describe how many states it explored regarding 2-bit `int`.
 
 **Exercise 3:**
 Think about how you can reduce the explored states soundly, that is, without violating the correctness of the checker.
