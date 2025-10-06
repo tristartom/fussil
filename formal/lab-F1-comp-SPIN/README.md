@@ -1,4 +1,4 @@
-Lab F1: Verifying `Comparison' by SPIN
+Lab F1: Verifying "Comparison" by SPIN
 ===
 
 You are given a program with a function `int* comp(int st, int ta)`.
