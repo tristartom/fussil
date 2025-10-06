@@ -7,7 +7,7 @@ Your task is to prove the following property: for any `st`, `ta`, and `st1 = com
 
 You are required to use **SPIN** ([https://spinroot.com/spin/Man/](https://spinroot.com/spin/Man/)) to mechanize this proof. You can find instructions to set up SPIN lab here: [https://spinroot.com/courses/summer/](https://spinroot.com/courses/summer/) .
 
-In all exercises in this lab, you will be given two C programs (one is compliance and one triggers violation):
+In all exercises in this lab, you will be given two C programs below, one that complies with the target property and another that violates it.
 
 ```c
 int* comp1(int st, int ta){
