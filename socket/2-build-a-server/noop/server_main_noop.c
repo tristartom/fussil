@@ -5,7 +5,7 @@ int main(int argc, char **argv) {
   struct sockaddr_in clientaddr;
   socklen_t clientlen = sizeof(clientaddr);
   listenfd = open_listenfd(port);
-  for(int i = 0; i < 3; i++){
+  for(int i = 0; i < 5; i++){
 //  while (1) {
     connfd = accept(listenfd, (SA *)&clientaddr, &clientlen);
     printf("Socket connected: %d\n", connfd);
