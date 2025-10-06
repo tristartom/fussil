@@ -11,15 +11,17 @@ In all exercises in this lab, you will be given two C programs below, one that c
 
 ```c
 int* comp1(int st, int ta){
-    static int st;
-    if (st < ta) st = ta;
-    return st;
+    static int st2;
+    if (st < ta) st2 = ta;
+    else st2 = st;
+    return st2;
 }
 
 int* comp2(int st, int ta){
     static int st2;
-    if (st < ta && st != 0) st = ta;
-    return st;
+    if (st < ta && st != 0) st2 = ta;
+    else st2 = st;
+    return st2;
 }
 ```
 
