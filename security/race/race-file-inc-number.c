@@ -10,7 +10,9 @@ void inc_file() {
 
 int main() {
   fork();
-  inc_file();
+  inc_file(); //0->1; 1->2
+  inc_file(); //2->3; 3->4
+  inc_file(); 
   inc_file();
 }
 

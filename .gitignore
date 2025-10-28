@@ -5,3 +5,4 @@ socket2/*
 socket/src/server_main_sum2*
 *.swp
 *.txt
+.temp/*

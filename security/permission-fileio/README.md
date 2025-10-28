@@ -1,6 +1,17 @@
 Instructions
 ===
 
+Demo setuid (from SEED)
+---
+
+```
+cp /bin/cat mycat
+ls -l mycat
+sudo chown root mycat
+sudo chmod 4755 mycat
+```
+
+
 Demo multi-user permissions in bash
 ---
 
