@@ -3,23 +3,25 @@ Lab F1: Verifying "Comparison" by SPIN
 
 You are given a program with a function `int* comp(int st, int ta)`.
 
-Your task is to prove the following property: for any `st`, `ta`, and `st1 = comp(st, ta)`, prove `st1 > st`.
+Your task is to prove the following property: for any `st`, `ta`, and `st1 = comp(st, ta)`, prove `st1 >= st`.
 
-You are required to use **SPIN** ([https://spinroot.com/spin/Man/](https://spinroot.com/spin/Man/)) to mechanize this proof. You can find instructions to set up SPIN lab here: [https://spinroot.com/courses/summer/](https://spinroot.com/courses/summer/) .
+You are required to use **SPIN** ([https://spinroot.com/spin/Man/](https://spinroot.com/spin/Man/)) to mechanize this proof. You can find instructions regarding SPIN setup here: [https://spinroot.com/courses/summer/](https://spinroot.com/courses/summer/) .
 
 In all exercises in this lab, you will be given two C programs below, one that complies with the target property and another that violates it.
 
 ```c
 int* comp1(int st, int ta){
-    static int st;
-    if (st < ta) st = ta;
-    return st;
+    static int st2;
+    if (st < ta) st2 = ta;
+    else st2 = st;
+    return st2;
 }
 
 int* comp2(int st, int ta){
     static int st2;
-    if (st < ta && st != 0) st = ta;
-    return st;
+    if (st < ta || st == 1) st2 = ta;
+    else st2 = st;
+    return st2;
 }
 ```
 
