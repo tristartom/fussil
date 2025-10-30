@@ -9,7 +9,7 @@ char access_w(char* filename){
   return (buf.st_mode & S_IWUSR) ? 'w' : '-';
 }
 
-char buf2[] = "GOOD";
+char buf2[] = "Alice";
 
 void write_to_file(char* filename, char* permname){
   if (access_w(permname) == 'w'){
