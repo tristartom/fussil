@@ -11,26 +11,48 @@ sudo chown root mycat
 sudo chmod 4755 mycat
 ```
 
+Demo multi-user permissions in bash (2)
+---
+
+```
+touch file_wo.txt
+sudo chown root file_wo.txt 
+sudo chmod 620 file_wo.txt 
+ls -ltr file_wo.txt 
+#-rw--w----  1 root  staff  0 Feb  3 11:58 file_wo.txt
+echo "alice" >> file_wo.txt 
+#expected to succeed
+###### cat 1 (from tristartom)
+cat file_wo.txt
+#expected to fail
+sudo su
+###### cat 2 (from root)
+cat file_wo.txt 
+exit
+# exit the prompt
+###### cat 3 (from root)
+sudo cat file_wo.txt 
+```
 
 Demo multi-user permissions in bash
 ---
 
 ```
-touch file_r.txt
-sudo chown root file_r.txt 
-sudo chmod 640 file_r.txt 
-ls -ltr file_r.txt 
-#-rw-r-----  1 root  staff  0 Feb  3 11:58 file_r.txt
-echo "alice" >> file_r.txt 
+touch file_ro.txt
+sudo chown root file_ro.txt 
+sudo chmod 640 file_ro.txt 
+ls -ltr file_ro.txt 
+#-rw-r-----  1 root  staff  0 Feb  3 11:58 file_ro.txt
+echo "alice" >> file_ro.txt 
 #expected to fail
-cat file_r.txt 
+cat file_ro.txt 
 #expected to succeed 'cause the current user (tristartom) may be in the same group as root.
 sudo su
 #in the prompt
-echo "bob" >> file_r.txt 
+echo "bob" >> file_ro.txt 
 exit
 # exit the prompt
-cat file_r.txt 
+cat file_ro.txt 
 ```
 
 Run capability-leaking attack
