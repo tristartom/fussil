@@ -1,14 +1,27 @@
 Instructions
 ===
 
-Demo setuid (from SEED)
+How to turn a program to a setuid program (from SEED)
 ---
 
+Turn mycat4 from a normal program to a setuid program
+
 ```
-cp /bin/cat mycat
-ls -l mycat
-sudo chown root mycat
-sudo chmod 4755 mycat
+#turn a program into SETUID program
+touch /etc/zzz1
+sudo chown root /etc/zzz1
+sudo chmod g-r /etc/zzz1
+sudo chmod o-r /etc/zzz1
+
+cp /bin/cat mycat4
+ls -l mycat4
+./mycat4 /etc/zzz1
+sudo chown root mycat4
+ls -l mycat4
+./mycat4 /etc/zzz1
+sudo chmod 4755 mycat4
+ls -l mycat4
+./mycat4 /etc/zzz1
 ```
 
 Demo multi-user permissions in bash (2)
@@ -67,6 +80,7 @@ make attack-capability-leaking
 #sh-3.2$ 
 #in the above prompt, type the following:
 echo yyy >&3
+cat /etc/zzz
 ```
 
 Toggle the protection on, in the setuid.c
