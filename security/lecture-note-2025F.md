@@ -1,3 +1,6 @@
+Privileged programs
+===
+
 Motivating application: fine-grained control of access to shared password file
 ---
 
@@ -36,11 +39,14 @@ back to the example of shared password file:
 
 ??? fine-grained ACL
 
-Permissions and ACL
-===
+setuid program: Downgrading
+---
 
-Privileged programs
-===
+confused deputy bug
+---
+
+Misc.
+---
 
 normal user: nathan
 root user: root
