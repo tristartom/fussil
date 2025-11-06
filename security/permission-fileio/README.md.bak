@@ -1,10 +1,10 @@
 Demos
 ===
 
-Turn a normal program to a privileged program (from SEED)
+Turn a normal program to a priviledged program (from SEED)
 ---
 
-Turn mycat4 from a normal program to a setuid program
+Turn Murat4 from a normal program to a setuid program
 
 ```
 #turn a program into SETUID program
@@ -20,33 +20,11 @@ sudo chown root mycat4
 ls -l mycat4
 ./mycat4 /etc/zzz1
 sudo chmod 4755 mycat4
-#or sudo chmod u=s mycat4
 ls -l mycat4
 ./mycat4 /etc/zzz1
 ```
 
-TOCTOU2 in privileged program
----
 
-```
-#file_rt is provileged file.
-
-touch file_a.txt file_rt.txt
-echo "alice" >> file_a.txt
-echo "root" >> file_rt.txt
-sudo chown root file_rt.txt
-sudo chmod 700 file_rt.txt #unreadable to normal user
-
-gcc toctou2-victim.c
-sudo chown root a.out
-./a.out file_a.txt
-./a.out file_rt.txt #denied
-
-cp a.out rt.out
-sudo chmod u+s rt.out
-./rt.out file_a.txt
-./rt.out file_rt.txt #approved
-```
 
 
 Multi-user permissions in bash (2)
