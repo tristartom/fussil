@@ -1,4 +1,4 @@
-Instructions
+Demos
 ===
 
 How to turn a program to a setuid program (from SEED)
@@ -24,7 +24,10 @@ ls -l mycat4
 ./mycat4 /etc/zzz1
 ```
 
-Demo multi-user permissions in bash (2)
+
+
+
+Multi-user permissions in bash (2)
 ---
 
 ```
