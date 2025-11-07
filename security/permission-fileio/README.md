@@ -7,45 +7,37 @@ Turn a normal program to a privileged program (from SEED)
 Turn mycat4 from a normal program to a setuid program
 
 ```
-#turn a program into SETUID program
-touch /etc/zzz1
-sudo chown root /etc/zzz1
-sudo chmod g-r /etc/zzz1
-sudo chmod o-r /etc/zzz1
-
-cp /bin/cat mycat4
-ls -l mycat4
-./mycat4 /etc/zzz1
-sudo chown root mycat4
-ls -l mycat4
-./mycat4 /etc/zzz1
-sudo chmod 4755 mycat4
-#or sudo chmod u=s mycat4
-ls -l mycat4
-./mycat4 /etc/zzz1
+make turn-priv-program
 ```
 
 TOCTOU2 in privileged program
 ---
 
+Without attacks
+
 ```
-#file_rt is provileged file.
+make files
+make toctou2-v
+```
 
-touch file_a.txt file_rt.txt
-echo "alice" >> file_a.txt
-echo "root" >> file_rt.txt
-sudo chown root file_rt.txt
-sudo chmod 700 file_rt.txt #unreadable to normal user
+Under attacks
 
-gcc toctou2-victim.c
-sudo chown root a.out
-./a.out file_a.txt
-./a.out file_rt.txt #denied
+On terminal 1:
 
-cp a.out rt.out
-sudo chmod u+s rt.out
-./rt.out file_a.txt
-./rt.out file_rt.txt #approved
+```
+make files
+```
+
+On terminal 2:
+
+```
+make toctou2-a
+```
+
+Back on terminal 1
+
+```
+make toctou2-v
 ```
 
 

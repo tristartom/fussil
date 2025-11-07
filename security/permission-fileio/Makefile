@@ -8,11 +8,23 @@ files:
 
 setuid: files
 	-rm a.out
-	gcc setuid.c 
-	sudo chown root a.out 
-	sudo chmod u+s a.out 
-	./a.out file_a.txt
-	./a.out file_rt.txt
+	gcc setuid.c -o rt.out
+	sudo chown root rt.out 
+	sudo chmod u+s rt.out 
+	./rt.out file_rt.txt
+	./rt.out file_rt.txt
+
+toctou2-v: 
+	-rm rt.out
+	gcc toctou2-victim.c -o rt.out
+	sudo chown root rt.out
+	sudo chmod u+s rt.out
+	./rt.out file_a.txt
+	#./rt.out file_rt.txt #approved
+
+toctou2-a:
+	gcc toctou2-attack.c -o attack2.out
+	./attack2.out 
 
 turn-priv-program:
 	#turn a program into SETUID program

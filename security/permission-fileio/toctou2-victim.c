@@ -6,11 +6,11 @@
 char buf2[6];
 
 int access2_r(char* filename){
-  return open(filename, O_RDONLY) <= 0; 
+  int fd = open(filename, O_RDONLY);
+  return fd <= 0; 
 }
 
 int main(int argc, char** argv){
-  setuid(0);
 //  if (access(argv[1], R_OK) != 0){ // TOC
   if (access2_r(argv[1]) != 0){ // TOC
     printf("no read permission\n");
