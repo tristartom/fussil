@@ -1,24 +1,28 @@
-#include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
+#include <sys/types.h>
 
-int main(void){
+int main(int argc, char** argv){
+  int ruid=getuid();
+  int euid=geteuid();
   int fd;
-  char *v[2];
 
-  fd = open("/etc/zzz", O_RDWR | O_APPEND);        
-  if (fd == -1) {
-     printf("Cannot open /etc/zzz\n");exit(0);
-  }
+  printf("Before setuid:\n");
 
-  printf("fd is %d\n", fd);
-  // protection: close(fd);
-  // Permanently disable the privilege by making the
-  // effective uid the same as the real uid
-  setuid(getuid());                                
+  printf(" Real UID: %d\n", getuid());
+  printf(" Effective UID: %d\n", geteuid());
+  fd = open(argv[1], O_RDONLY); //TOU
+  printf(" Open fd: %d\n", fd);
 
-  // Execute /bin/sh
-  v[0] = "/bin/sh"; v[1] = 0;
-  execve(v[0], v, 0);
+  // Try to change effective UID to 0 (root)
+  if (setuid(ruid) == -1) perror("setuid failed");
+
+  printf("\nAfter setuid():\n");
+
+  printf(" Real UID: %d\n", getuid());
+  printf(" Effective UID: %d\n", geteuid());
+  fd = open(argv[1], O_RDONLY); //TOU
+  printf(" Open fd: %d\n", fd);
 }
+

@@ -66,12 +66,19 @@ Demo: `cd permission-fileio; make turn-priv-program`
 RUID/EUID
 ---
 
-RUID: the account calling the program
-EUID: the ID the program uses to interact with OS (internal-calls syscalls)
+- RUID: the account calling the program
+- EUID: the ID the program uses to interact with OS (internal-calls syscalls)
 
-By default: 
-- EUID = RUID for normal program
-- EUID = root for privileged program (owner of the program file)
+```
++----+         +-------+         +----+
+|User|--RUID-->|Program|--EUID-->| OS |
++----+         +-------+         +----+
+```
+
+- By default: 
+  - `EUID = RUID` for normal program
+  - `EUID = root` for privileged program (owner of the program file)
+
 
 `setuid()`
 ---
@@ -83,6 +90,28 @@ You can use `setuid()` function to change EUID inside the program file.
 int setuid(uid_t uid);
 uid_t getuid(void); //the real user ID, RUID
 uid_t geteuid(void); //returns the effective user ID, EUID
+```
+
+Demo
+---
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+  int ruid=getuid();
+  int euid=geteuid();
+  printf("Before setuid:\n");
+  printf(" Real UID: %d\n", getuid());
+  printf(" Effective UID: %d\n", geteuid());
+  // Try to change effective UID to 0 (root)
+  if (setuid(ruid) == -1) perror("setuid failed");
+  printf("\nAfter setuid(0):\n");
+  printf(" Real UID: %d\n", getuid());
+  printf(" Effective UID: %d\n", geteuid());
+}
 ```
 
 Summary
@@ -97,6 +126,22 @@ Consider `Alice` calls an executable file owned by `root`.
 | Privileged (before `setuid()`) | `Alice` | `root` |
 | Privileged (after `setuid()`) | `Alice` | `Alice` |
 
+Principle of least privilege
+---
+
+P1: Privilege exercised
+P2: Privilege needed
+
+| P1 | P2 | Utility | Security |
+|----|----|---------|----------|
+| L  | L  |    ✔    |     ✔    |
+| L  | H  |    ✗    |     N.A. |
+| H  | H  |     ✔   |     ✔    |
+| H  | L  |    ✔    |     ❌   |
+
+
+
+
 Internal design of privileged programs
 ---
 
@@ -104,19 +149,15 @@ Internal design of privileged programs
 2. fine-grained access control
 3. execute the job the user/Alice requests
 
-Revisit shared password file:
+Revisit password file
 ---
 
 - normal file-grained access control: a permission (binary 0/1) defined on file f and user type g
 - fine-grained access control: a permission (binary 0/1) defined on a line of a file l and a specific account (Alice).
 
-??? fine-grained ACL
-
 setuid program: Downgrading
-===
 
 confused deputy bug
-===
 
 Misc.
 ===
