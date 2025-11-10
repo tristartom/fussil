@@ -16,6 +16,8 @@ int main(int argc, char** argv){
     printf("no read permission\n");
     return 1;
   }
+  //mitigation: least priviledge principle
+  // setuid(getuid());
   //access allowed
   int fd = open(argv[1], O_RDONLY); //TOU
   if (fd < 0) {printf("open error"); return -1;}

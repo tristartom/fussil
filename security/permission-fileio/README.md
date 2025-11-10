@@ -26,15 +26,10 @@ On terminal 1:
 
 ```
 make files
-```
-
-On terminal 2:
-
-```
 make toctou2-a
 ```
 
-Back on terminal 1
+On terminal 2:
 
 ```
 make toctou2-v

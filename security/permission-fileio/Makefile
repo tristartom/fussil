@@ -19,7 +19,7 @@ toctou2-v:
 	gcc toctou2-victim.c -o rt.out
 	sudo chown root rt.out
 	sudo chmod u+s rt.out
-	./rt.out file_a.txt
+	-./rt.out file_a.txt
 	#./rt.out file_rt.txt #approved
 
 toctou2-a:
