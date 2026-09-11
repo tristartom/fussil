@@ -7,3 +7,5 @@ socket/src/server_main_sum2*
 *.txt
 .temp/*
 *.bak
+*.dSYM
+*.s

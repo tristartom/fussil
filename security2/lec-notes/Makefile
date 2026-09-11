@@ -1,6 +1,15 @@
 FILE ?= lecture-note-2025F
 
-DIR_REVEAL_JS ?= /Users/tristartom/workspace/Courses/slides-revealjs/reveal.js
+DIR_REVEAL_JS ?= /Users/ytang100/workspace/reveal.js
+
+html2: 
+	pandoc $(FILE).md \
+	  --to=revealjs \
+	  --standalone \
+	  --variable theme=white \
+	  --output=$(FILE).html
+	open -a "Google Chrome" "$(FILE).html"
+
 
 html: $(FILE).md
 	echo "$(DIR_REVEAL_JS)"
