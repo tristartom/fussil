@@ -1,7 +1,7 @@
 Demos
 ===
 
-Multi-user permissions in bash (2)
+1. Multi-user permissions in bash (2)
 ---
 
 ```
@@ -24,16 +24,25 @@ exit
 sudo cat file_wo.txt 
 ```
 
-Turn a normal program to a privileged program (from SEED)
+2. Turn a normal program to a privileged program (from SEED)
 ---
 
 Turn mycat4 from a normal program to a setuid program
 
 ```
+make turn-priv-program-macos
 make turn-priv-program
 ```
 
-TOCTOU2 in privileged program
+
+3. Set-uid program
+---
+
+```
+make setuid
+```
+
+4. TOCTOU2 in privileged program
 ---
 
 Without attacks
