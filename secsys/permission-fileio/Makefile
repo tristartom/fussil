@@ -42,6 +42,30 @@ turn-priv-program:
 	ls -l mycat4
 	./mycat4 /etc/zzz1
 
+turn-priv-program-macos:
+	#turn a program into SETUID program
+	touch ./zzz2
+	echo "Alice" >> ./zzz2
+	cat zzz2
+	sudo chown root ./zzz2
+	sudo chmod g-r ./zzz2
+	sudo chmod o-r ./zzz2
+	ls -l zzz2 
+	#-rw----r--  1 root  staff  6 Sep 20 04:20 zzz2
+	cp /bin/cat mycat4
+	codesign --force --sign - ./mycat4
+	codesign --verify --verbose=4 ./mycat4
+	sudo chown root mycat4
+	ls -l mycat4
+	./mycat4 ./zzz2
+	sudo chown root mycat4
+	ls -l mycat4
+	./mycat4 ./zzz2
+	sudo chmod 4755 mycat4
+	ls -l mycat4
+	./mycat4 ./zzz2
+	echo "takeaway: Setuid runs the program as the executable’s owner"
+
 attack-capability-leaking:
 	gcc confused.c
 	sudo chown root a.out
