@@ -52,7 +52,7 @@ files:
 
 setuid: files
 	-rm -f *.out
-	gcc 2-setuid.c -o rt.out
+	gcc 3-setuid.c -o rt.out
 	sudo chown root rt.out 
 	sudo chmod u+s rt.out 
 	ls -l *.out
@@ -61,15 +61,17 @@ setuid: files
 	-rm -f *.out *.txt
 
 toctou2-v: 
-	-rm rt.out
-	gcc toctou2-victim.c -o rt.out
+	-rm -f rt.out
+	gcc 4-toctou2-victim.c -o rt.out
 	sudo chown root rt.out
 	sudo chmod u+s rt.out
+	ls -l *.out *.txt
 	-./rt.out file_a.txt
 	#./rt.out file_rt.txt #approved
+	-rm -f rt.out
 
 toctou2-a:
-	gcc toctou2-attack.c -o attack2.out
+	gcc 4-toctou2-attack.c -o attack2.out
 	./attack2.out 
 
 attack-capability-leaking:

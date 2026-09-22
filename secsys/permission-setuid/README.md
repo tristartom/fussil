@@ -31,7 +31,7 @@ Turn mycat4 from a normal program to a setuid program
 
 ```
 make turn-priv-program-macos
-make turn-priv-program
+#make turn-priv-program
 ```
 
 
