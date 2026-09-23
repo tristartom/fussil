@@ -9,6 +9,7 @@ socket/src/server_main_sum2*
 *.bak
 *.dSYM
 *.s
+.DS_Store
 
 TOREMOVE/
 TOREMOVE2/
