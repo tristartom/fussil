@@ -34,7 +34,6 @@ make turn-priv-program-macos
 #make turn-priv-program
 ```
 
-
 3. Set-uid program
 ---
 
@@ -42,7 +41,24 @@ make turn-priv-program-macos
 make setuid
 ```
 
-4. TOCTOU2 in privileged program
+4. Confused deputy (Capability-leaking attack)
+---
+
+```
+make clean
+make attack-capability-leaking
+#this will fail, which is expected.
+./a.out
+#fd is 3
+#sh-3.2$ 
+#in the above prompt, type the following:
+echo yyy >&3
+cat /etc/zzz
+```
+
+Toggle the protection on, in the setuid.c
+
+5. TOCTOU2 in privileged program
 ---
 
 Without attacks
@@ -66,23 +82,6 @@ On terminal 2:
 ```
 make toctou2-v
 ```
-
-Confused deputy (Capability-leaking attack)
----
-
-```
-make clean
-make attack-capability-leaking
-#this will fail, which is expected.
-./a.out
-#fd is 3
-#sh-3.2$ 
-#in the above prompt, type the following:
-echo yyy >&3
-cat /etc/zzz
-```
-
-Toggle the protection on, in the setuid.c
 
 
 Demos (Deprecated)

@@ -60,9 +60,25 @@ setuid: files
 	./rt.out file_rt.txt
 	-rm -f *.out *.txt
 
+attack-capability-leaking:
+	gcc 4-confused.c
+	sudo chown root a.out
+	sudo chmod 4755 a.out
+	touch zzz3
+	echo alice > zzz3
+	touch zzz4
+	echo bob > zzz4
+	sudo chown root zzz4
+	sudo chmod 744 zzz4
+	ls -l a.out zzz4 zzz3
+	cat zzz3
+	cat zzz4
+	./a.out
+	-rm -f a.out zzz4 zzz3
+
 toctou2-v: 
 	-rm -f rt.out
-	gcc 4-toctou2-victim.c -o rt.out
+	gcc 5-toctou2-victim.c -o rt.out
 	sudo chown root rt.out
 	sudo chmod u+s rt.out
 	ls -l *.out *.txt
@@ -71,20 +87,8 @@ toctou2-v:
 	-rm -f rt.out
 
 toctou2-a:
-	gcc 4-toctou2-attack.c -o attack2.out
+	gcc 5-toctou2-attack.c -o attack2.out
 	./attack2.out 
-
-attack-capability-leaking:
-	gcc confused.c
-	sudo chown root a.out
-	ls -ltr a.out
-	sudo chmod 4755 a.out
-	ls -ltr a.out
-	sudo touch /etc/zzz
-	sudo chmod 744 /etc/zzz
-	cat /etc/zzz
-	echo aaa > /etc/zzz
-	./a.out
 
 attack-seed-setuidlab-task8:
 	gcc setuid2.c 
