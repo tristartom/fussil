@@ -83,7 +83,7 @@ toctou2-v:
 	sudo chmod u+s rt.out
 	ls -l *.out *.txt
 	-./rt.out file_a.txt
-	#./rt.out file_rt.txt #approved
+	-./rt.out file_rt.txt #suppose to fail
 	-rm -f rt.out
 
 toctou2-a:

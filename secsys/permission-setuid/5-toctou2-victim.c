@@ -11,16 +11,16 @@ int access2_r(char* filename){
 }
 
 int main(int argc, char** argv){
-  if (access(argv[1], R_OK) != 0){ // TOC
-//  if (access2_r(argv[1]) != 0){ // TOC
+  if (access(argv[1], R_OK) != 0){ // TOC: check accessible under RUID 
+//if (access2_r(argv[1]) != 0){ // TOC: check accessible under EUID 
     printf("no read permission\n");
-    return 1;
-  }
+    return 1;}
   //mitigation: least priviledge principle
-  // setuid(getuid());
+  //setuid(getuid());
   //access allowed
-  int fd = open(argv[1], O_RDONLY); //TOU
-  if (fd < 0) {printf("open error"); return -1;}
+  int fd = open(argv[1], O_RDONLY); // TOU: open accessible under EUID
+  if (fd < 0) {
+    printf("open error"); return -1;}
   while(read(fd, buf2, 1) == 1)
     printf("%c", buf2[0]); 
   close(fd);
