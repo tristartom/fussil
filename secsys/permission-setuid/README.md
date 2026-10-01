@@ -61,6 +61,15 @@ Toggle the protection on, in the setuid.c
 5. TOCTOU2 in privileged program
 ---
 
+#### Overview
+
+| | Normal | DoS attack | Priv. escalation |
+| --- | --- | --- | --- |
+| `file_a.txt`  | ✅ | ❌ | |
+| `file_rt.txt` | ❌ | | ✅ |
+
+#### Normal (no attack)
+
 Without attacks: A setuid program under alice and root
 
 ```
@@ -68,7 +77,7 @@ make files
 make toctou2-d
 ```
 
-Under attacks
+#### DoS attack
 
 On terminal 1:
 
@@ -83,45 +92,5 @@ On terminal 2:
 make toctou2-v
 ```
 
+#### Priv. escalation
 
-Demos (Deprecated)
-===
-
-Demo multi-user permissions in bash
----
-
-```
-touch file_ro.txt
-sudo chown root file_ro.txt 
-sudo chmod 640 file_ro.txt 
-ls -ltr file_ro.txt 
-#-rw-r-----  1 root  staff  0 Feb  3 11:58 file_ro.txt
-echo "alice" >> file_ro.txt 
-#expected to fail
-cat file_ro.txt 
-#expected to succeed 'cause the current user (tristartom) may be in the same group as root.
-sudo su
-#in the prompt
-echo "bob" >> file_ro.txt 
-exit
-# exit the prompt
-cat file_ro.txt 
-```
-
-Run seed-setuidlab-task8 attack （deprecated）
----
-
-This attack doesn't work on latest Linux/MacOS which is protected.
-
-```
-make clean
-make attack-seed-setuidlab-task8
-touch file1.txt
-echo xxx > file1.txt 
-./a.out file1.txt 
-touch /etc/zzz
-sudo chmod 700 /etc/zzz
-ls -ltr /etc/zzz
-cat /etc/zzz
-./a.out "file1.txt; cat /etc/zzz" 
-```
