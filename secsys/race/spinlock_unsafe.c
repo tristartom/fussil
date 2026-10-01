@@ -2,6 +2,15 @@
 #include <sys/mman.h>
 
 /*
+- Why spinlock_unsafe.c is unsafe
+
+| Step | Process A                                  | Process B                                  |
+| ---- | ------------------------------------------ | ------------------------------------------ |
+| 1    | Reads `*lock == 1` and exits the loop      |                                            |
+| 2    |                                            | Reads `*lock == 1` and exits the loop      |
+| 3    | Writes `*lock = 0`;enters critical section |                                            |
+| 4    |                                            | Writes `*lock = 0`; enters critical section|
+
 void* shared_malloc(size_t size){
   int prot = PROT_READ | PROT_WRITE;
   int flag = MAP_SHARED | MAP_ANONYMOUS;
