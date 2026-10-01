@@ -1,7 +1,7 @@
 safe_file:
 	touch counter.txt
 	echo 0 > counter.txt
-	gcc spinlock.c ../../process/4-mmap/mmap_lib.c race-proof-file-inc-number.c -o a.out
+	gcc spinlock_unsafe.c ../../process/4-mmap/mmap_lib.c race-proof-file-inc-number.c -o a.out
 	./a.out
 	cat counter.txt
 	rm  counter.txt
@@ -20,7 +20,7 @@ race_mmap:
 	rm a.out
 
 safe_mmap:
-	gcc -O0 spinlock.c ../../process/4-mmap/mmap_lib.c race-proof-mmap-inc-number.c
+	gcc -O0 spinlock_unsafe.c ../../process/4-mmap/mmap_lib.c race-proof-mmap-inc-number.c
 	./a.out
 	rm a.out
 
