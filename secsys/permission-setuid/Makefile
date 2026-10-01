@@ -76,14 +76,25 @@ attack-capability-leaking:
 	./a.out
 	-rm -f a.out zzz4 zzz3
 
-toctou2-v: 
+toctou2-d: 
 	-rm -f rt.out
 	gcc 5-toctou2-victim.c -o rt.out
 	sudo chown root rt.out
 	sudo chmod u+s rt.out
 	ls -l *.out *.txt
+	whoami
 	-./rt.out file_a.txt
 	-./rt.out file_rt.txt #suppose to fail
+	-rm -f rt.out
+
+toctou2-v: 
+	-rm -f rt.out
+	gcc 5-toctou2-victim.c -o rt.out
+	sudo chown root rt.out
+	sudo chmod u+s rt.out
+	-ls -l *.out *.txt
+	whoami
+	-./rt.out file_a.txt
 	-rm -f rt.out
 
 toctou2-a:

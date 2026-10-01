@@ -65,7 +65,7 @@ Without attacks: A setuid program under alice and root
 
 ```
 make files
-make toctou2-v
+make toctou2-d
 ```
 
 Under attacks
